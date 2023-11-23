@@ -43,7 +43,6 @@ public class CitaRepository implements ICitaRepository{
         }
         return horarioFechaListResponses;
     }
-
     @Override
     public MantenimientoResponseModel mantenimientoCita(CitaRequest citaRequest) {
         String SQL = "EXEC sp_MantenimientoCita ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";

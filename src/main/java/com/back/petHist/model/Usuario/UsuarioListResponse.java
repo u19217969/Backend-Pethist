@@ -13,6 +13,6 @@ public class UsuarioListResponse {
     String login;
     String nroDocumento;
     String correo;
-    boolean estado;
+    int estado;
     int totalRegistros;
 }

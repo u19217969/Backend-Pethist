@@ -20,6 +20,15 @@ public class UsuarioAccesoHijoResponse {
     Boolean registrar;
     Boolean actualizar;
     Boolean eliminar;
+    Boolean procesar;
+
+    public Boolean getProcesar() {
+        return procesar;
+    }
+
+    public void setProcesar(Boolean procesar) {
+        this.procesar = procesar;
+    }
 
     public int getnIdMenuHijo() {
         return nIdMenuHijo;

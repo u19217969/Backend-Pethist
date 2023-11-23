@@ -8,8 +8,17 @@ public class AccesoHijoRequest {
     boolean actualizar;
     boolean eliminar;
     boolean acceso;
+    boolean procesar;
     String creaUsuario;
     String modificaUsuario;
+
+    public boolean isProcesar() {
+        return procesar;
+    }
+
+    public void setProcesar(boolean procesar) {
+        this.procesar = procesar;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

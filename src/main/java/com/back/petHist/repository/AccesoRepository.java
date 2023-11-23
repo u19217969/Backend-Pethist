@@ -53,7 +53,7 @@ public class AccesoRepository implements IAccesoRepository{
 
     @Override
     public MantenimientoResponseModel mantenimientoAcceso(AccesoRequest[] accesoRequest) {
-        String SQL = "EXEC sp_RegistrarAcceso ?, ?, ?, ?, ?, ?, ?, ?, ?";
+        String SQL = "EXEC sp_RegistrarAcceso ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
         MantenimientoResponseModel resultados=new MantenimientoResponseModel();
         for (AccesoRequest accessRequest : accesoRequest) {
             Object[] params = {
@@ -64,6 +64,7 @@ public class AccesoRepository implements IAccesoRepository{
                     accessRequest.isActualizar(),
                     accessRequest.isEliminar(),
                     accessRequest.isAcceso(),
+                    accessRequest.isProcesar(),
                     accessRequest.getCreaUsuario(),
                     accessRequest.getModificaUsuario()
             };
@@ -86,7 +87,7 @@ public class AccesoRepository implements IAccesoRepository{
     }
 
     private MantenimientoResponseModel mantenimientoAccesoHijo(AccesoHijoRequest accesoRequest){
-        String SQL = "EXEC sp_RegistrarAcceso ?, ?, ?, ?, ?, ?, ?, ?, ?";
+        String SQL = "EXEC sp_RegistrarAcceso ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
         Object[] params = {
                 accesoRequest.getIdUsuario(),
                 accesoRequest.getIdMenuHijo(),
@@ -95,6 +96,7 @@ public class AccesoRepository implements IAccesoRepository{
                 accesoRequest.isActualizar(),
                 accesoRequest.isEliminar(),
                 accesoRequest.isAcceso(),
+                accesoRequest.isProcesar(),
                 accesoRequest.getCreaUsuario(),
                 accesoRequest.getModificaUsuario()
         };

@@ -13,7 +13,7 @@ public class MascotaRequest {
     Date fechaNacimiento;
     String colorMascota;
     int idUsuario;
-    boolean estado;
+    int estado;
     String creaUsuario;
     String modificaUsuario;
     int flag;
@@ -74,11 +74,11 @@ public class MascotaRequest {
         this.idUsuario = idUsuario;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

@@ -24,13 +24,16 @@ public class MaestroController {
         ServiceResponseModel serviceResponse=new ServiceResponseModel();
         try {
             var result=iMaestroService.listarMaestro(parametro);
-            if (result.size()==0){
+            serviceResponse.setRecords(!result.isEmpty());
+
+           /* if (result.size()==0){
                 serviceResponse.setRecords(false);
                 serviceResponse.setMessage(Constantes.messageListaMaestroVacio);
             }else{
                 serviceResponse.setRecords(true);
                 serviceResponse.setMessage(Constantes.messageListaMaestroVacio);
-            }
+            }*/
+            serviceResponse.setMessage(Constantes.messageListaMaestroVacio);
             serviceResponse.setSuccess(true);
             serviceResponse.setDataListModel(result);
             return new ResponseEntity<>(serviceResponse, HttpStatus.OK);

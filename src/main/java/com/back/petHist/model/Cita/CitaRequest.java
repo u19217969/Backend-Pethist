@@ -11,7 +11,7 @@ public class CitaRequest {
     String motivo;
     String observacion;
     int idEstadoCita;
-    boolean estado;
+    int estado;
     String creaUsuario;
     String modificaUsuario;
     int flag;
@@ -80,11 +80,11 @@ public class CitaRequest {
         this.idEstadoCita = idEstadoCita;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

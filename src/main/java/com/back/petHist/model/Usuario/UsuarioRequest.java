@@ -9,7 +9,7 @@ public class UsuarioRequest {
     String nroDocumento;
     String clave;
     String correo;
-    boolean estado;
+    int estado;
     String creaUsuario;
     String modificaUsuario;
     int flag;
@@ -78,11 +78,11 @@ public class UsuarioRequest {
         this.correo = correo;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

@@ -2,7 +2,6 @@ package com.back.petHist.model.Cita;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
 import java.util.Date;
 @Data
 public class CitaListResponse {
@@ -20,6 +19,6 @@ public class CitaListResponse {
     String nombreMascota;
     String horaCita;
     String motivo;
-    boolean estado;
+    int estado;
     int totalRegistros;
 }

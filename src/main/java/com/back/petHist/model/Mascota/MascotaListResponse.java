@@ -18,6 +18,6 @@ public class MascotaListResponse {
     int idUsuario;
     String nombreUsuario;
     String colorMascota;
-    boolean estado;
+    int estado;
     int totalRegistros;
 }

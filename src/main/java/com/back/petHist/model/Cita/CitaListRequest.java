@@ -13,6 +13,8 @@ public class CitaListRequest {
     int idMascota;
     String filtro;
 
+
+
     public int getNumeroPagina() {
         return numeroPagina;
     }

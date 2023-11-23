@@ -57,14 +57,15 @@ public class UsuarioRepository implements IUsuarioRepository{
 
     @Override
     public List<UsuarioListResponse> usuarioLista(UsuarioListRequest usuarioListRequest) {
-        String SQL = "EXEC sp_ListarUsuarios ?, ?, ?, ?, ?, ?";
+        String SQL = "EXEC sp_ListarUsuarios ?, ?, ?, ?, ?, ?, ?";
         Object[] params = {
                 usuarioListRequest.getNumeroPagina(),
                 usuarioListRequest.getNumeroRegistros(),
                 usuarioListRequest.getIdTipoDocumento(),
                 usuarioListRequest.getNroDocumento(),
                 usuarioListRequest.getIdTipoUsuario(),
-                usuarioListRequest.getFiltro()
+                usuarioListRequest.getFiltro(),
+                usuarioListRequest.getIdUsuarioLogueado()
         };
         List<UsuarioListResponse>  resultados = jdbcTemplate.query(SQL, params, new BeanPropertyRowMapper<>(UsuarioListResponse.class));
 

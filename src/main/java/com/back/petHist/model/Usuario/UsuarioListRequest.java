@@ -13,6 +13,16 @@ public class UsuarioListRequest {
     int idTipoUsuario;
     String filtro;
 
+    int idUsuarioLogueado;
+
+    public int getIdUsuarioLogueado() {
+        return idUsuarioLogueado;
+    }
+
+    public void setIdUsuarioLogueado(int idUsuarioLogueado) {
+        this.idUsuarioLogueado = idUsuarioLogueado;
+    }
+
     public int getNumeroPagina() {
         return numeroPagina;
     }

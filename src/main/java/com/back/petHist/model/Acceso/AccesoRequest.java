@@ -10,10 +10,19 @@ public class AccesoRequest {
     boolean actualizar;
     boolean eliminar;
     boolean acceso;
+    boolean procesar;
     String creaUsuario;
     String modificaUsuario;
 
     List<AccesoHijoRequest> usuarioAccesoHijo;
+
+    public boolean isProcesar() {
+        return procesar;
+    }
+
+    public void setProcesar(boolean procesar) {
+        this.procesar = procesar;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

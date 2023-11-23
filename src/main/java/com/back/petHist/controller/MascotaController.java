@@ -23,6 +23,7 @@ public class MascotaController {
         ServiceResponseModel serviceResponse=new ServiceResponseModel();
         try {
             var result=iMascotaService.mantenimientoMascota(mascotaRequest);
+
             if (result==null){
                 serviceResponse.setRecords(false);
                 serviceResponse.setMessage(Constantes.messageListaTablaVacio);
