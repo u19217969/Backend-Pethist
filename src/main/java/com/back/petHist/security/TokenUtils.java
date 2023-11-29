@@ -6,12 +6,12 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
+import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+@Component
 public class TokenUtils {
     private final static String ACCESS_TOKEN_SECRET= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.utcjcgtC-ypEbsgNZ7_hi53YurZHV6rZ3AQe7YiJ8hs";
     private final static Long ACCESS_TOKEN_VALIDITY_SECOND= 2_592_00L;
@@ -35,6 +35,7 @@ public class TokenUtils {
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
                 .compact();
     }
+
     public static UsernamePasswordAuthenticationToken getAuthentication(String token){
         try {
             Claims claims=Jwts.parserBuilder()

@@ -5,10 +5,16 @@ import com.back.petHist.model.Notificacion.NotificacionListRequest;
 import com.back.petHist.model.Paginado.PaginadoResponse;
 import com.back.petHist.model.ServiceResponseModel;
 import com.back.petHist.service.INotificacionService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/control/notificacion")

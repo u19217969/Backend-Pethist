@@ -2,6 +2,8 @@ package com.back.petHist.controller;
 
 import com.back.petHist.model.Acceso.AccesoRequest;
 import com.back.petHist.model.Acceso.UsuarioAccesoRequest;
+import com.back.petHist.model.Acceso.RecuperarContrasenia;
+import com.back.petHist.model.Maestro.TablaRequestModel;
 import com.back.petHist.model.Constantes;
 import com.back.petHist.model.ServiceResponseModel;
 import com.back.petHist.service.IAccesoService;
@@ -53,6 +55,29 @@ public class AccesoController {
             serviceResponse.setDataModel(result);
             return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
         }catch (Exception e){
+            serviceResponse.setSuccess(false);
+            serviceResponse.setMessage(Constantes.messageErrorServidor);
+            return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/recuperarContrasenia")
+    public ResponseEntity<ServiceResponseModel> recuperarContrasenia(@RequestBody RecuperarContrasenia recuperarContrasenia) {
+        ServiceResponseModel serviceResponse = new ServiceResponseModel();
+        try {
+            var result = iAccesoService.recuperarContrasenia(recuperarContrasenia);
+            if (result == null) {
+                serviceResponse.setRecords(false);
+                serviceResponse.setMessage(Constantes.messageListaTablaVacio);
+            } else {
+                serviceResponse.setRecords(true);
+                serviceResponse.setMessage(Constantes.messageConfCorreo);
+            }
+            serviceResponse.setSuccess(true);
+            serviceResponse.setSuccess(result == "Exito" ? true : false);
+
+            return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
+        } catch (Exception e) {
             serviceResponse.setSuccess(false);
             serviceResponse.setMessage(Constantes.messageErrorServidor);
             return new ResponseEntity<>(serviceResponse, HttpStatus.OK);

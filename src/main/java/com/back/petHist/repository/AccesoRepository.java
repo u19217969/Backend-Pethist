@@ -6,14 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import com.back.petHist.model.Authentication.AuthCredentials;
+import com.back.petHist.model.Mail.MailRequest;
+import com.back.petHist.model.ServiceResponseModel;
+import com.back.petHist.model.Usuario.UsuarioFindRequest;
+import com.back.petHist.model.Usuario.UsuarioListResponse;
+import com.back.petHist.model.Usuario.UsuarioLoginResponse;
+import com.back.petHist.security.TokenUtils;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 import java.util.List;
 @Repository
 public class AccesoRepository implements IAccesoRepository{
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private final TokenUtils tokenUtils;
+    private final RestTemplate restTemplate;
 
+    public AccesoRepository(TokenUtils tokenUtils,RestTemplate restTemplate) {
+        this.tokenUtils = tokenUtils;
+        this.restTemplate=restTemplate;
 
+    }
     @Override
     public List<UsuarioAccesoResponse> accesoUsuario(UsuarioAccesoRequest usuarioAccesoRequest) {
         String SQLMENU = "EXEC sp_UsuarioAccesos ?";
@@ -104,6 +120,41 @@ public class AccesoRepository implements IAccesoRepository{
         return resultados;
 
     }
+    @Override
+    public String recuperarContrasenia(RecuperarContrasenia recuperarContrasenia) {
+        String SQL = "EXEC sp_RecuperarContrasenia ?";
+        Object[] params = {
+                recuperarContrasenia.getCorreo()
+        };
+        Integer idUsuario = jdbcTemplate.queryForObject(SQL, params, Integer.class);
 
+        UsuarioLoginResponse usuarioLoginResponse = new UsuarioLoginResponse();
+        usuarioLoginResponse.setnIdUsuario(idUsuario);
+
+        String token = tokenUtils.createToken(usuarioLoginResponse);
+        String respuestaEnvioCorreo="";
+
+        //Enviar correo
+        // Configurar encabezados para la solicitud POST
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        MailRequest requestBody=new MailRequest();
+        requestBody.setTo(recuperarContrasenia.getCorreo());
+        requestBody.setSubject("ASUNTO");
+        requestBody.setBody("Url a ingresar: "+"http://localhost:4200/cambiar-clave/"+token);
+
+        // Crear la entidad HTTP con el cuerpo de la solicitud y los encabezados
+        HttpEntity<MailRequest> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        // Hacer una solicitud POST al servicio externo
+        ServiceResponseModel respuesta = restTemplate.postForObject("http://localhost:9000/api/control/mail/enviarCorreo", requestEntity, ServiceResponseModel.class);
+        if(respuesta.getSuccess()){
+            respuestaEnvioCorreo="Exito";
+        }else{
+            respuestaEnvioCorreo="Error";
+        }
+        return respuestaEnvioCorreo;
+    }
 
 }

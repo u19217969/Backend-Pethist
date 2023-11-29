@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface INotificacionRepository {
     public List<NotificacionListResponse> notificacionLista(NotificacionListRequest notificacionListRequest);
+    public List<String> idsAdministration();
 }

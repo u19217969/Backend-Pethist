@@ -15,12 +15,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.client.RestTemplate;
 @Configuration
+@ComponentScan(basePackages = "com.back.petHist.security")
 @AllArgsConstructor
 public class WebSecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager) throws Exception{
         JWTAuthenticationFilter jwtAuthenticationFilter=new JWTAuthenticationFilter();
@@ -31,8 +38,10 @@ public class WebSecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.GET, "/api/control/maestros/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/control/usuario/mantenimiento").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/control/maestros/**","/notificationSSE/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/control/usuario/mantenimiento","/notificationSSE/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/control/accesos/recuperarContrasenia").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/control/mail/enviarCorreo").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

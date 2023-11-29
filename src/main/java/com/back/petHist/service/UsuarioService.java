@@ -37,7 +37,16 @@ public class UsuarioService implements IUsuarioService{
         }
         return mantenimientoResponseModel;
     }
-
+    @Override
+    public MantenimientoResponseModel actualizarContrasenia(ActualizarContraseniaRequest actualizarContraseniaRequest) {
+        MantenimientoResponseModel mantenimientoResponseModel;
+        try {
+            mantenimientoResponseModel=iUsuarioRepository.actualizarContrasenia(actualizarContraseniaRequest);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return mantenimientoResponseModel;
+    }
     @Override
     public List<UsuarioListResponse> usuarioLista(UsuarioListRequest usuarioListRequest) {
         List<UsuarioListResponse>  usuarioListResponse;

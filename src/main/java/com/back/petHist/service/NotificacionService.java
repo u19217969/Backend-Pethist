@@ -21,4 +21,15 @@ public class NotificacionService implements INotificacionService{
         }
         return notificacionListResponse;
     }
+
+    @Override
+    public List<String> idsAdministration() {
+        List<String> ids;
+        try {
+            ids=iNotificacionRepository.idsAdministration();
+        }catch(Exception e){
+            throw e;
+        }
+        return ids;
+    }
 }

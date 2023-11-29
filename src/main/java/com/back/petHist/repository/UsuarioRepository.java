@@ -54,7 +54,20 @@ public class UsuarioRepository implements IUsuarioRepository{
         MantenimientoResponseModel resultados = jdbcTemplate.queryForObject(SQL, params, new BeanPropertyRowMapper<>(MantenimientoResponseModel.class));
         return resultados;
     }
-
+    @Override
+    public MantenimientoResponseModel actualizarContrasenia(ActualizarContraseniaRequest actualizarContraseniaRequest) {
+        String SQL = "EXEC sp_ActualizarContrasenia ?, ?";
+        String claveEncriptada="";
+        if (actualizarContraseniaRequest.getContrasenia()!=""){
+            claveEncriptada=new BCryptPasswordEncoder().encode(actualizarContraseniaRequest.getContrasenia());
+        }
+        Object[] params = {
+                actualizarContraseniaRequest.getIdUsuario(),
+                claveEncriptada
+        };
+        MantenimientoResponseModel resultados = jdbcTemplate.queryForObject(SQL, params, new BeanPropertyRowMapper<>(MantenimientoResponseModel.class));
+        return resultados;
+    }
     @Override
     public List<UsuarioListResponse> usuarioLista(UsuarioListRequest usuarioListRequest) {
         String SQL = "EXEC sp_ListarUsuarios ?, ?, ?, ?, ?, ?, ?";

@@ -27,4 +27,14 @@ public class NotificacionRepository implements INotificacionRepository{
 
         return resultados;
     }
+
+    @Override
+    public List<String> idsAdministration() {
+        //vista
+        String SQL="select nIdUsuario from IDsAdministradores";
+        List<String> resultados = jdbcTemplate.query(SQL, (rs, rowNum) -> rs.getString("nIdUsuario"));
+        System.out.println(resultados);
+        return resultados;
+
+    }
 }

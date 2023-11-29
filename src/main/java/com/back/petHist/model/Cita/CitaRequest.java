@@ -15,6 +15,16 @@ public class CitaRequest {
     String creaUsuario;
     String modificaUsuario;
     int flag;
+    int idUser;
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
 
     public int getIdCita() {
         return idCita;

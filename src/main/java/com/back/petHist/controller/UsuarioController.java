@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.back.petHist.model.Usuario.ActualizarContraseniaRequest;
 @RestController
 @RequestMapping("api/control/usuario")
 @CrossOrigin("*")   
@@ -90,4 +90,25 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/actualizarContrasenia")
+    public ResponseEntity<ServiceResponseModel> actualizarContrasenia(@RequestBody ActualizarContraseniaRequest actualizarContraseniaRequest) {
+        ServiceResponseModel serviceResponse = new ServiceResponseModel();
+        try {
+            var result = iUsuarioService.actualizarContrasenia(actualizarContraseniaRequest);
+            if (result == null) {
+                serviceResponse.setRecords(false);
+                serviceResponse.setMessage(Constantes.messageListaTablaVacio);
+            } else {
+                serviceResponse.setRecords(true);
+                serviceResponse.setMessage(Constantes.messageActualizarPass);
+            }
+            serviceResponse.setSuccess(true);
+            serviceResponse.setDataModel(result);
+            return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            serviceResponse.setSuccess(false);
+            serviceResponse.setMessage(Constantes.messageErrorServidor);
+            return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
+        }
+    }
 }

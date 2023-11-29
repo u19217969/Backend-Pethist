@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface IUsuarioService {
     public UsuarioListResponse buscarUsuario(UsuarioFindRequest usuarioFindRequest);
     public MantenimientoResponseModel mantenimientoUsuario(UsuarioRequest usuarioRequest);
+    public MantenimientoResponseModel actualizarContrasenia(ActualizarContraseniaRequest actualizarContraseniaRequest);
     public List<UsuarioListResponse>  usuarioLista(UsuarioListRequest usuarioListRequest);
     Optional<UsuarioRecuperarResponse> usuarioLoginResponse(String cCorreo);
     public int save( UsuarioModel usuario);

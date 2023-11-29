@@ -7,7 +7,7 @@ import com.back.petHist.model.MantenimientoResponseModel;
 import com.back.petHist.repository.IAccesoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.back.petHist.model.Acceso.RecuperarContrasenia;
 import java.util.List;
 
 @Service
@@ -35,5 +35,15 @@ public class AccesoService implements IAccesoService{
             throw ex;
         }
         return mantenimientoResponseModel;
+    }
+    @Override
+    public String recuperarContrasenia(RecuperarContrasenia recuperarContrasenia) {
+        String respuesta="";
+        try {
+            respuesta=iAccesoRepository.recuperarContrasenia(recuperarContrasenia);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return respuesta;
     }
 }

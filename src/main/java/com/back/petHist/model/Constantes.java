@@ -12,4 +12,6 @@ public class Constantes {
     public static final String messageListaMaestroVacio = "Lista de maestro esta vacío.";
     public static final String messageListaTabla = "Lista de tabla.";
     public static final String messageListaTablaVacio = "Lista de tabla esta vacío.";
+    public static final String messageActualizarPass = "Se actualizo la contraseña correctamente, por favor vuelva a ingresar al sistema.";
+    public static final String messageConfCorreo = "Se envió un correo para el cambio de contraseña, por favor revisar su bandeja de entrada.";
 }

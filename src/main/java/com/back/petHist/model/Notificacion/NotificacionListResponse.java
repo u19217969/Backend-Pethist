@@ -13,6 +13,6 @@ public class NotificacionListResponse {
     Date fechaCita;
     String nombreMascota;
     String horaCita;
-    boolean estado;
+    int estado;
     int totalRegistros;
 }
